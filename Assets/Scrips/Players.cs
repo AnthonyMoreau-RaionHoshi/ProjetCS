@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
+    public int Keys;
     private Animation My_Animation;
     bool My_IsPlaying_forward = false;
     Transform AnimationPlayer;
@@ -49,4 +50,15 @@ public class Players : MonoBehaviour
             
         }
     }
+
+    public void OnTriggerEnter(Collider Col)
+    {
+        if (Col.gameObject.tag == "Keys") 
+        {
+            Debug.Log("Clé collecté");
+            Keys++;
+            Destroy(Col.gameObject);
+        }
+    }
+
 }

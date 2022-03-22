@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ 
 
 public class Players : MonoBehaviour
 {
@@ -61,4 +62,16 @@ public class Players : MonoBehaviour
         }
     }
 
+    //fait crash unity et VS, je dois encore régler ça mais jsp comment faire (Damien)
+    //Le but final étant de faire tomber la plaque bleu foncé quand on passe dans le collider.
+
+    /*public void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            Debug.log("Platform tombée");
+
+            Destroy(collider.gameObject);
+        }
+    }*/
 }

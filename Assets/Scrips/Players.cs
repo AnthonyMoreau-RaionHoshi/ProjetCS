@@ -56,22 +56,16 @@ public class Players : MonoBehaviour
     {
         if (Col.gameObject.tag == "Keys") 
         {
-            Debug.Log("Clé collecté");
+            Debug.Log("Clï¿½ collectï¿½");
             Keys++;
             Destroy(Col.gameObject);
         }
+
+        
     }
 
-    //fait crash unity et VS, je dois encore régler ça mais jsp comment faire (Damien)
-    //Le but final étant de faire tomber la plaque bleu foncé quand on passe dans le collider.
+    //fait crash unity et VS, je dois encore rï¿½gler ï¿½a mais jsp comment faire (Damien)
+    //Le but final ï¿½tant de faire tomber la plaque bleu foncï¿½ quand on passe dans le collider.
 
-    /*public void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            Debug.log("Platform tombée");
-
-            Destroy(collider.gameObject);
-        }
-    }*/
+   
 }

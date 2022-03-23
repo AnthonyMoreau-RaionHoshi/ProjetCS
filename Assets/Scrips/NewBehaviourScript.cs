@@ -17,9 +17,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (Col.gameObject.name == "Player")
         {
             Debug.Log("Platform tombée");
-
             Falling_Platform.isKinematic = false;
-
         }
     }
 

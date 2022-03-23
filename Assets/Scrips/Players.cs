@@ -51,8 +51,9 @@ public class Players : MonoBehaviour
         {
             PlayerRigidBody.transform.position = -PositionInit;
         }
-        if((Vector3.Distance(PlayerRigidBody.transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
+        if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
         {
+            Debug.Log("Porte passer");
             PlayerRigidBody.transform.position = -PositionInit; 
         }
     }
@@ -63,14 +64,8 @@ public class Players : MonoBehaviour
         {
             Debug.Log("Cl� collect�");
             Keys++;
+            Debug.Log(Keys);
             Destroy(Col.gameObject);
         }
-
-        
     }
-
-    //fait crash unity et VS, je dois encore r�gler �a mais jsp comment faire (Damien)
-    //Le but final �tant de faire tomber la plaque bleu fonc� quand on passe dans le collider.
-
-   
 }

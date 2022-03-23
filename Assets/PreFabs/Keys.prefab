@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7483162050770269014}
   - component: {fileID: 7483162050770269013}
   m_Layer: 0
-  m_Name: "Cl\xE9s"
-  m_TagString: Untagged
+  m_Name: Keys
+  m_TagString: Keys
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

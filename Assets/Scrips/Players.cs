@@ -10,13 +10,15 @@ public class Players : MonoBehaviour
     bool My_IsPlaying_forward = false;
     Transform AnimationPlayer;
     Rigidbody PlayerRigidBody;
+    Transform Porte_sortie;
 
     Vector3 PositionInit =new Vector3(0,-2,0);
     void Start()
     {
         AnimationPlayer = GetComponentInChildren<Transform>();
-        My_Animation = GetComponentInChildren<Animation>();
         PlayerRigidBody = GetComponent<Rigidbody>();
+        Porte_sortie = GameObject.Find("Porte_sortie").GetComponent<Transform>();
+        //PositionInit = PlayerRigidBody.position;
     }
 
     void Update()
@@ -48,7 +50,10 @@ public class Players : MonoBehaviour
         if (transform.position.y < 1.20)
         {
             PlayerRigidBody.transform.position = -PositionInit;
-            
+        }
+        if((Vector3.Distance(PlayerRigidBody.transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
+        {
+            PlayerRigidBody.transform.position = -PositionInit; 
         }
     }
 

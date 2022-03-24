@@ -11,7 +11,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (transform.position.y <= -10)
+        if (transform.position.y <= -100)
         {
             Falling_Platform_R.isKinematic = true;
             transform.position = new Vector3(transform.position.x, 1, transform.position.z);

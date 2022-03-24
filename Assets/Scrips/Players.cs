@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+using UnityEngine.SceneManagement;
+
 
 public class Players : MonoBehaviour
 {
-    public int Keys;
+    private int Keys;
     private Animation My_Animation;
-    bool My_IsPlaying_forward = false;
-    Transform AnimationPlayer;
-    Rigidbody PlayerRigidBody;
-    Transform Porte_sortie;
-
-    Vector3 PositionInit =new Vector3(0,-2,0);
+    private bool My_IsPlaying_forward = false;
+    private Transform AnimationPlayer;
+    private Rigidbody PlayerRigidBody;
+    private Transform Porte_sortie;
+    private int LevelsEnCours = 0;
+    private string [] SceneActif = {"", };
+    private Vector3 PositionInit =new Vector3(0,-2,0);
     void Start()
     {
         AnimationPlayer = GetComponentInChildren<Transform>();
@@ -53,8 +55,9 @@ public class Players : MonoBehaviour
         }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
         {
-            Debug.Log("Porte passer");
-            PlayerRigidBody.transform.position = -PositionInit; 
+            Debug.Log("Porte passée");
+            LevelsEnCours++;
+            SceneManager.LoadScene(SceneActif[LevelsEnCours]);
         }
     }
 

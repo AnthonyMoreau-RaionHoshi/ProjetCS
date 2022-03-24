@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public Rigidbody Falling_Platform;
-
+    public Rigidbody Falling_Platform_R;
     void Start()
     {
-        Falling_Platform = GetComponent<Rigidbody>();
+        Falling_Platform_R = GetComponent<Rigidbody>();
     }
-
-    void OnTriggerEnter(Collider Col)
+    private void FixedUpdate()
+    {
+        if (transform.position.y <= -10)
+        {
+            Falling_Platform_R.isKinematic = true;
+            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+            Debug.Log("Pos Platform= " + transform.position);
+        }
+    } 
+        void OnTriggerEnter(Collider Col)
     {
         
         if (Col.gameObject.name == "Player")
         {
             Debug.Log("Platform tombée");
-            Falling_Platform.isKinematic = false;
+            Falling_Platform_R.isKinematic = false;
         }
     }
 

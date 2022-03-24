@@ -13,13 +13,13 @@ public class Players : MonoBehaviour
     private Rigidbody PlayerRigidBody;
     private Transform Porte_sortie;
     private int LevelsEnCours = 0;
-    private string [] SceneActif = {"", };
+    private string [] SceneActif = {"", "Level_1"};
     private Vector3 PositionInit =new Vector3(0,-2,0);
     void Start()
     {
         AnimationPlayer = GetComponentInChildren<Transform>();
         PlayerRigidBody = GetComponent<Rigidbody>();
-        Porte_sortie = GameObject.Find("Porte_sortie").GetComponent<Transform>();
+        Porte_sortie = GameObject.Find("Porte sortie").GetComponent<Transform>();
         //PositionInit = PlayerRigidBody.position;
     }
 
@@ -58,6 +58,7 @@ public class Players : MonoBehaviour
             Debug.Log("Porte passée");
             LevelsEnCours++;
             SceneManager.LoadScene(SceneActif[LevelsEnCours]);
+            Keys = 0;
         }
     }
 

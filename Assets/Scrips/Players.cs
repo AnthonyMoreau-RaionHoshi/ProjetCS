@@ -54,7 +54,7 @@ public class Players : MonoBehaviour
         }
         if (transform.position.y < 1.20)
         {
-            Lives--
+            Lives--;
             PlayerRigidBody.transform.position = -PositionInit;
         }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
@@ -76,8 +76,8 @@ public class Players : MonoBehaviour
             Destroy(Col.gameObject);
         }
     }
-    public static void Get_SceneActif()
+    public static string Get_SceneActif()
     {
-        return (SceneActif[LevelEnCours]);
+        return (SceneActif[DataPlayer.LevelEnCours]);
     }
 }

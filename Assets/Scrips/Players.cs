@@ -6,20 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class Players : MonoBehaviour
 {
-    private int Keys;
+    public int Keys;
+    private int Lives = 3;
     private Animation My_Animation;
     private bool My_IsPlaying_forward = false;
     private Transform AnimationPlayer;
     private Rigidbody PlayerRigidBody;
     private Transform Porte_sortie;
-    private int LevelsEnCours = 0;
-    private string [] SceneActif = {"", "Level_1"};
+    private static int LevelsEnCours = 0;
+    private static string [] SceneActif = {"", "Level_1"};
     private Vector3 PositionInit =new Vector3(0,-2,0);
+    
     void Start()
     {
         AnimationPlayer = GetComponentInChildren<Transform>();
         PlayerRigidBody = GetComponent<Rigidbody>();
         Porte_sortie = GameObject.Find("Porte sortie").GetComponent<Transform>();
+        
         //PositionInit = PlayerRigidBody.position;
     }
 
@@ -51,6 +54,7 @@ public class Players : MonoBehaviour
         }
         if (transform.position.y < 1.20)
         {
+            Lives--
             PlayerRigidBody.transform.position = -PositionInit;
         }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
@@ -71,5 +75,9 @@ public class Players : MonoBehaviour
             Debug.Log(Keys);
             Destroy(Col.gameObject);
         }
+    }
+    public static void Get_SceneActif()
+    {
+        return (SceneActif[LevelEnCours]);
     }
 }

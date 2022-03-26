@@ -13,8 +13,7 @@ public class Players : MonoBehaviour
     private Transform AnimationPlayer;
     private Rigidbody PlayerRigidBody;
     private Transform Porte_sortie;
-    private static int LevelsEnCours = 0;
-    private static string [] SceneActif = {"", "Level_1"};
+   
     private Vector3 PositionInit =new Vector3(0,-2,0);
     
     void Start()
@@ -60,8 +59,8 @@ public class Players : MonoBehaviour
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
         {
             Debug.Log("Porte passée");
-            LevelsEnCours++;
-            SceneManager.LoadScene(SceneActif[LevelsEnCours]);
+            DataPlayer.LevelEnCours++;
+            SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
             Keys = 0;
         }
     }
@@ -75,9 +74,5 @@ public class Players : MonoBehaviour
             Debug.Log(Keys);
             Destroy(Col.gameObject);
         }
-    }
-    public static string Get_SceneActif()
-    {
-        return (SceneActif[DataPlayer.LevelEnCours]);
     }
 }

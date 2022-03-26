@@ -18,14 +18,18 @@ public class NewBehaviourScript : MonoBehaviour
             Debug.Log("Pos Platform= " + transform.position);
         }
     } 
-        void OnTriggerEnter(Collider Col)
+    void OnTriggerEnter(Collider Col)
     {
         
         if (Col.gameObject.name == "Player")
         {
-            Debug.Log("Platform tombée");
-            Falling_Platform_R.isKinematic = false;
+            Invoke("PlatformTombe",(float) 0.2);
         }
+    }
+    public void PlatformTombe()
+    {
+        Debug.Log("Platform tombée");
+        Falling_Platform_R.isKinematic = false;
     }
 
 }

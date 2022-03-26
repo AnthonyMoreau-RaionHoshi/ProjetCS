@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Players : MonoBehaviour
 {
-    public int Keys;
-    private int Lives = 3;
     private Animation My_Animation;
     private bool My_IsPlaying_forward = false;
     private Transform AnimationPlayer;
@@ -53,15 +51,15 @@ public class Players : MonoBehaviour
         }
         if (transform.position.y < 1.20)
         {
-            Lives--;
+            DataPlayer.Lives--;
             PlayerRigidBody.transform.position = -PositionInit;
         }
-        if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
+        if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (DataPlayer.Keys >= 3))
         {
             Debug.Log("Porte passée");
             DataPlayer.LevelEnCours++;
             SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
-            Keys = 0;
+            DataPlayer.Keys = 0;
         }
     }
 
@@ -70,8 +68,8 @@ public class Players : MonoBehaviour
         if (Col.gameObject.tag == "Keys") 
         {
             Debug.Log("Cl� collect�");
-            Keys++;
-            Debug.Log(Keys);
+            DataPlayer.Keys++;
+            Debug.Log(DataPlayer.Keys);
             Destroy(Col.gameObject);
         }
     }

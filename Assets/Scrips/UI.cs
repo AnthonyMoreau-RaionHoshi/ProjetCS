@@ -19,13 +19,13 @@ public class UI : MonoBehaviour
             {
                 ImagesEnCours.enabled = false;
             }
-            if (ImagesEnCours.name == "live2" && DataPlayer.Lives == 1)
+            else if (ImagesEnCours.name == "live1" || ImagesEnCours == "live2" && DataPlayer.Lives == 1)
             {
                 ImagesEnCours.enabled = false;
             }
-            if (ImagesEnCours.name == "live1" && DataPlayer.Lives == 0)
+            else if (DataPlayer.Lives == 0)
             {
-                ImagesEnCours.enabled = false;
+                messagebox"game over" /pause 2 sec/ load menu scene
             }
         }
 

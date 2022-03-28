@@ -1,110 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.SceneManagement;
+
 
 public class Players : MonoBehaviour
 {
-
-    [SerializeField] private Transform groundCheckTransform = null;
-    [SerializeField] private int KeysObject;
-    TextMesh status;
+    public int Keys;
+    private int Lives = 3;
     private Animation My_Animation;
-    private bool[] boolKeys = new bool[] { false /*Left*/, false/*Arrow*/, false/*Down*/, false /*Right*/};
-    private KeyCode[] keyscode = new []{ KeyCode.LeftArrow,KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow};
-    Transform AnimationPlayer;
-    Rigidbody PlayerRigidBody;
-    private Vector3 PositionInit = new Vector3((float)-0.126000002, (float)1.60000002, 0);
-
+    private bool My_IsPlaying_forward = false;
+    private Transform AnimationPlayer;
+    private Rigidbody PlayerRigidBody;
+    private Transform Porte_sortie;
+   
+    private Vector3 PositionInit =new Vector3(0,-2,0);
+    
     void Start()
     {
-
-        status = GameObject.Find("Status").GetComponent<TextMesh>();
         AnimationPlayer = GetComponentInChildren<Transform>();
-        My_Animation = GetComponentInChildren<Animation>();
         PlayerRigidBody = GetComponent<Rigidbody>();
-
+        Porte_sortie = GameObject.Find("Porte sortie").GetComponent<Transform>();
+        
+        //PositionInit = PlayerRigidBody.position;
     }
 
     void Update()
-    {
-
-
-
-        status.text = "Clés : " + KeysObject;
-
-        for (int i = 0; i < keyscode.Length; i++) // Check touts les inputs. 
-        {
-            if (Input.GetKeyDown(keyscode[i]))
-            {
-                boolKeys[i] = true;
-            }
+    {   
+        if (Input.GetKeyDown(KeyCode.UpArrow) == true)
+        {   
+            My_IsPlaying_forward = true;
         }
-
-
-        
+        if (Input.GetKeyDown(KeyCode.RightArrow) == true)
+        {
+            AnimationPlayer.Translate(0, 0, (float)-1.25);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) == true)
+        {
+            AnimationPlayer.Translate((float)-1.25, 0, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) == true)
+        {
+            AnimationPlayer.Translate(0, 0, (float)1.25);
+        }
     }
     private void FixedUpdate()
     {
-        Debug.Log(Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length); //Permetde vérifier les points de contacts avec le player.
-        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length == 0)
+        if (My_IsPlaying_forward == true )
         {
-            iFall();
-            return;
-        }
-
-        WhereIGo();
-
-    }
-
-
-    public void WhereIGo() // Fonction pour connaitre la direction du joueur.
-    {
-
-
-
-        if (boolKeys[0])
-        {
-            AnimationPlayer.Translate(0, 0, (float)1.25);
-            boolKeys[0] = false;
-            
-        }
-        else if (boolKeys[1]) {
-
             AnimationPlayer.Translate((float)1.25, 0, 0);
-            
-            boolKeys[1] = false ;
+            My_IsPlaying_forward = false ;
         }
-        else if (boolKeys[2]) {
-            AnimationPlayer.Translate((float)-1.25, 0, 0);
-            boolKeys[2] = false ;
-        }
-        else if (boolKeys[3]) {
-            AnimationPlayer.Translate(0, 0, (float)-1.25);
-            
-            
-            boolKeys[3] = false ;
-        }
-    }
-
-    public void iFall() // Vérifie si il tombe sous un point y.
-    {
-        if (transform.position.y < 0)
+        if (transform.position.y < 1.20)
         {
-            PlayerRigidBody.transform.position = PositionInit;
+            Lives--;
+            PlayerRigidBody.transform.position = -PositionInit;
+        }
+        if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
+        {
+            Debug.Log("Porte passÃ©e");
+            DataPlayer.LevelEnCours++;
+            SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
+            Keys = 0;
         }
     }
 
-
-
-    public void OnTriggerEnter(Collider Col) // Check la colisition avec un objet key.
+    public void OnTriggerEnter(Collider Col)
     {
         if (Col.gameObject.tag == "Keys") 
         {
-            Debug.Log("Clé collecté");
-            KeysObject++;
+            Debug.Log("Clï¿½ collectï¿½");
+            Keys++;
+            Debug.Log(Keys);
             Destroy(Col.gameObject);
         }
     }
-
 }

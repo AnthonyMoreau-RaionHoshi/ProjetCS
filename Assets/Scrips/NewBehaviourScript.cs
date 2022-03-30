@@ -14,7 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (transform.position.y <= -100)
         {
             Falling_Platform_R.isKinematic = true;
-            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+            Falling_Platform_R.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
             Debug.Log("Pos Platform= " + transform.position);
         }
     } 

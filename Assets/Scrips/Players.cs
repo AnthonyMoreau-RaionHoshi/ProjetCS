@@ -57,7 +57,7 @@ public class Players : MonoBehaviour
             PlayerRigidBody.transform.position = -PositionInit;
         }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
-        {
+        {   
             Debug.Log("Porte passée");
             DataPlayer.LevelEnCours++;
             SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
@@ -73,6 +73,12 @@ public class Players : MonoBehaviour
             Keys++;
             Debug.Log(Keys);
             Destroy(Col.gameObject);
+        }
+
+        if ((Col.gameObject.tag == "Spike" )|| (Col.gameObject.tag == "Lazer" ))
+        {
+            Lives--;
+            PlayerRigidBody.transform.position = -PositionInit;
         }
     }
 }

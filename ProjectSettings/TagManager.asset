@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Keys
   - Platform_Tombante
+  - Spike
+  - Lazer
   layers:
   - Default
   - TransparentFX

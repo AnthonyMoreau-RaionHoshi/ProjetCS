@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 
 public class Players : MonoBehaviour
 {
-    public static int Keys=0;
-    public static int Lives = 2;
+    [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser, musicTeleport, musicFall;
+    [SerializeField] private Transform groundCheckTransform = null;
+    [SerializeField] private static int Keys=0;
+    [SerializeField] private static int Lives = 2;
     string[,] CurrentScene = new string[3, 4] { { "UI_L1K0", "UI_L1K1", "UI_L1K2", "UI_L1K3"},
         { "UI_L2K0", "UI_L2K1", "UI_L2K2", "UI_L2K3"}, { "UI_L3K0", "UI_L3K1", "UI_L3K2","UI_L3K3"} };
     private Animation My_Animation;
@@ -17,6 +20,7 @@ public class Players : MonoBehaviour
     private Transform Porte_sortie;
     private Vector3 PositionInit =new Vector3(0,-2,0);
     
+    
     void Start()
     {
         GOReset();
@@ -24,27 +28,34 @@ public class Players : MonoBehaviour
         PlayerRigidBody = GetComponent<Rigidbody>();
         Porte_sortie = GameObject.Find("Porte sortie").GetComponent<Transform>();
         //PositionInit = PlayerRigidBody.position;
+        musiclevel.Play();
     }
 
     void Update()
     {
+
         UIUpDate();
-        if (Input.GetKeyDown(KeyCode.UpArrow) == true)
-        {   
-            My_IsPlaying_forward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow) == true)
+        Debug.Log(Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length); //Permetde v�rifier les points de contacts avec le player.
+        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length > 1)
         {
-            AnimationPlayer.Translate(0, 0, (float)-1.25);
+            if (Input.GetKeyDown(KeyCode.UpArrow) == true)
+            {
+                My_IsPlaying_forward = true;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) == true)
+            {
+                AnimationPlayer.Translate(0, 0, (float)-1.25);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow) == true)
+            {
+                AnimationPlayer.Translate((float)-1.25, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow) == true)
+            {
+                AnimationPlayer.Translate(0, 0, (float)1.25);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) == true)
-        {
-            AnimationPlayer.Translate((float)-1.25, 0, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) == true)
-        {
-            AnimationPlayer.Translate(0, 0, (float)1.25);
-        }
+            
     }
     private void FixedUpdate()
     {
@@ -55,11 +66,14 @@ public class Players : MonoBehaviour
         }
         if (transform.position.y < 1.20)
         {
+            musicFall.Play();
             Lives--;
             PlayerRigidBody.transform.position = -PositionInit;
         }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
-        {   
+        {
+            musiclevel.Stop();
+            musicTeleport.Play();
             Debug.Log("Porte passée");
             DataPlayer.LevelEnCours++;
             SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
@@ -72,6 +86,7 @@ public class Players : MonoBehaviour
     {
         if (Col.gameObject.tag == "Keys") 
         {
+            musicKey.Play();
             Debug.Log("Cl� collect�");
             Keys++;
             Debug.Log(Keys);
@@ -80,6 +95,7 @@ public class Players : MonoBehaviour
 
         if ((Col.gameObject.tag == "Spike" )|| (Col.gameObject.tag == "Lazer" ))
         {
+            musicLaser.Play();
             Lives--;
             PlayerRigidBody.transform.position = -PositionInit;
         }
@@ -116,4 +132,6 @@ public class Players : MonoBehaviour
         }   
     }
 
+
+    
 }

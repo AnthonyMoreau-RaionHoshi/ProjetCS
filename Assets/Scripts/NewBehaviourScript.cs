@@ -5,6 +5,8 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     public Rigidbody Falling_Platform_R;
+    public AudioSource musicShaking;
+
     void Start()
     {
         Falling_Platform_R = GetComponent<Rigidbody>();
@@ -23,6 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
         
         if (Col.gameObject.name == "Player")
         {
+            musicShaking.Play();
             Invoke("PlatformTombe",(float) 0.2);
         }
     }

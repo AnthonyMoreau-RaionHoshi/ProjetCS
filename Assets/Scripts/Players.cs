@@ -7,13 +7,14 @@ using UnityEngine.Audio;
 
 public class Players : MonoBehaviour
 {
-    [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser, musicTeleport, musicFall;
+    [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser, musicTeleport, musicFall, musicGameOver;
     [SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private static int Keys=0;
     [SerializeField] private static int Lives = 2;
     string[,] CurrentScene = new string[3, 4] { { "UI_L1K0", "UI_L1K1", "UI_L1K2", "UI_L1K3"},
         { "UI_L2K0", "UI_L2K1", "UI_L2K2", "UI_L2K3"}, { "UI_L3K0", "UI_L3K1", "UI_L3K2","UI_L3K3"} };
     private Animation My_Animation;
+    private KeyCode[] keyscode = new[] { KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow };
     private bool My_IsPlaying_forward = false;
     private Transform AnimationPlayer;
     private Rigidbody PlayerRigidBody;
@@ -111,6 +112,7 @@ public class Players : MonoBehaviour
     {
         if (Lives == -1)
         {
+            musicGameOver.Play();
             SceneManager.LoadSceneAsync("UI_GAMEOVER", LoadSceneMode.Additive);
             Keys = 0;
             Lives = 2;
@@ -131,7 +133,5 @@ public class Players : MonoBehaviour
             SceneManager.LoadSceneAsync(CurrentScene[Lives, Keys], LoadSceneMode.Additive);
         }   
     }
-
-
     
 }

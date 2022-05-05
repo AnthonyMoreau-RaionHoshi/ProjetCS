@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI_L3K3.unity
     guid: ed9701b1d1913464aa4ea6489517b8e6
+  - enabled: 1
+    path: Assets/Scenes/UIMenuIG.unity
+    guid: f1041995714499548bafe4bb593b28da
   m_configObjects: {}

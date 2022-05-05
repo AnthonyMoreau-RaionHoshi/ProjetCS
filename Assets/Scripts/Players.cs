@@ -9,8 +9,8 @@ public class Players : MonoBehaviour
 {
     [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser, musicTeleport, musicFall, musicGameOver;
     [SerializeField] private Transform groundCheckTransform = null;
-    [SerializeField] private static int Keys=0;
-    [SerializeField] private static int Lives = 2;
+    [SerializeField] public static int Keys=0;
+    [SerializeField] public static int Lives = 2;
     string[,] CurrentScene = new string[3, 4] { { "UI_L1K0", "UI_L1K1", "UI_L1K2", "UI_L1K3"},
         { "UI_L2K0", "UI_L2K1", "UI_L2K2", "UI_L2K3"}, { "UI_L3K0", "UI_L3K1", "UI_L3K2","UI_L3K3"} };
     private Animation My_Animation;
@@ -34,7 +34,6 @@ public class Players : MonoBehaviour
 
     void Update()
     {
-
         UIUpDate();
         Debug.Log(Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length); //Permetde v�rifier les points de contacts avec le player.
         if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f).Length > 1)
@@ -58,6 +57,7 @@ public class Players : MonoBehaviour
         }
             
     }
+    
     private void FixedUpdate()
     {
         if (My_IsPlaying_forward == true )
@@ -101,6 +101,7 @@ public class Players : MonoBehaviour
             PlayerRigidBody.transform.position = -PositionInit;
         }
     }
+    
     public void GOReset()
     {
         if (SceneManager.GetSceneByName("UI_GAMEOVER").isLoaded == true)
@@ -108,14 +109,19 @@ public class Players : MonoBehaviour
             SceneManager.UnloadSceneAsync("UI_GAMEOVER");
         }
     }
+    
     public void UIUpDate()
     {
-        if (Lives == -1)
+        if (Input.GetKeyDown(KeyCode.Escape) == true)
         {
+            SceneManager.LoadSceneAsync("UIMenuIG", LoadSceneMode.Additive);
+        }
+        else if (Lives == -1)
+        {
+            Lives = 2;
+            Keys = 0;
             musicGameOver.Play();
             SceneManager.LoadSceneAsync("UI_GAMEOVER", LoadSceneMode.Additive);
-            Keys = 0;
-            Lives = 2;
             DataPlayer.LevelEnCours = 0;
         }
         else if(SceneManager.GetSceneByName(CurrentScene[Lives, Keys]).isLoaded == false)

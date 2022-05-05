@@ -8,7 +8,10 @@ public class menu : MonoBehaviour
     // le bouton quitter ne peu etre testé que sur un .exe vu qu il quitte l application (pas de stress si il ne fonctionne pas sur unity).
     public static void Jouer() 
     {
-        SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
+        SceneManager.LoadScene(DataPlayer.SceneActif[0]);
+        Players.Lives = 2;
+        Players.Keys = 0;
+        DataPlayer.LevelEnCours = 0;
     }
     public static void Charger()
     {
@@ -23,7 +26,10 @@ public class menu : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-    
+    public static void Continue()
+    {
+        SceneManager.UnloadSceneAsync("UIMenuIG");
+    }
 
 
 }

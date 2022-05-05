@@ -112,7 +112,7 @@ public class Players : MonoBehaviour
     
     public void UIUpDate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) == true)
+        if (Input.GetKeyDown(KeyCode.Escape) == true && SceneManager.GetSceneByName("UIMenuIG").isLoaded == false)
         {
             SceneManager.LoadSceneAsync("UIMenuIG", LoadSceneMode.Additive);
         }

@@ -25,19 +25,17 @@ public class menu : MonoBehaviour
         string SaveString = string.Join(SaveSeparator, content);
         File.WriteAllText(Application.dataPath + "/data.txt", SaveString);
     }
-
     public static void load()
     {
         string SaveString = File.ReadAllText(Application.dataPath + "/data.txt");
         string[] content = SaveString.Split(new[] { SaveSeparator }, System.StringSplitOptions.None);
         DataPlayer.LevelEnCours = int.Parse(content[0]);
         Players.Lives = int.Parse(content[1]);
+        Players.Keys = 0;
         SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
-
     }
     public static void Quitter()
     {
-
         Application.Quit();
     }
     public static void Menu()

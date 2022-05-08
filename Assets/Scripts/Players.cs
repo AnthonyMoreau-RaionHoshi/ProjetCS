@@ -65,12 +65,6 @@ public class Players : MonoBehaviour
             AnimationPlayer.Translate((float)1.25, 0, 0);
             My_IsPlaying_forward = false ;
         }
-        if (transform.position.y < 1.20)
-        {
-            musicFall.Play();
-            Lives--;
-            PlayerRigidBody.transform.position = -PositionInit;
-        }
         if((Vector3.Distance(transform.position, Porte_sortie.transform.position) <0.5) && (Keys >= 3))
         {
             musiclevel.Stop();
@@ -115,6 +109,12 @@ public class Players : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) == true && SceneManager.GetSceneByName("UIMenuIG").isLoaded == false)
         {
             SceneManager.LoadSceneAsync("UIMenuIG", LoadSceneMode.Additive);
+        }
+        else if (transform.position.y < 1.20)
+        {
+            musicFall.Play();
+            Lives--;
+            PlayerRigidBody.transform.position = -PositionInit;
         }
         else if (Lives == -1)
         {

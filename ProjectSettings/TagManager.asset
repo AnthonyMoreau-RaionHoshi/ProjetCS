@@ -8,6 +8,8 @@ TagManager:
   - Platform_Tombante
   - Spike
   - Lazer
+  - Heart
+  - Coin
   layers:
   - Default
   - TransparentFX

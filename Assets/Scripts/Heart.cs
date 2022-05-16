@@ -12,7 +12,5 @@ public class Heart : MonoBehaviour
             sound_heart_collect.Play();
             Destroy(gameObject);
         }
-
-
     }
 }

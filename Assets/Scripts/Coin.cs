@@ -9,6 +9,7 @@ public class Coin : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             sound_coin_collecte.Play();
+            DataPlayer.Coins++;
             Destroy(gameObject);
         }
     }

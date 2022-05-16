@@ -14,6 +14,7 @@ public class menu : MonoBehaviour
         Players.Lives = 2;
         Players.Keys = 0;
         DataPlayer.LevelEnCours = 0;
+        DataPlayer.Coins = 0;
     }
     public static void save()
     {
@@ -21,6 +22,7 @@ public class menu : MonoBehaviour
         {
             DataPlayer.LevelEnCours.ToString(),
             Players.Lives.ToString(),
+            DataPlayer.Coins.ToString()
         };
         string SaveString = string.Join(SaveSeparator, content);
         File.WriteAllText(Application.dataPath + "/data.txt", SaveString);
@@ -31,6 +33,7 @@ public class menu : MonoBehaviour
         string[] content = SaveString.Split(new[] { SaveSeparator }, System.StringSplitOptions.None);
         DataPlayer.LevelEnCours = int.Parse(content[0]);
         Players.Lives = int.Parse(content[1]);
+        DataPlayer.Coins = int.Parse(content[2]);
         Players.Keys = 0;
         SceneManager.LoadScene(DataPlayer.SceneActif[DataPlayer.LevelEnCours]);
     }

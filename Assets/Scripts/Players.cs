@@ -7,17 +7,18 @@ using UnityEngine.Audio;
 
 public class Players : MonoBehaviour
 {
-    [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser, musicTeleport, musicFall, musicGameOver, musicUnlock;
+    [SerializeField] private AudioSource musiclevel, musicKey, musicSpike, musicLaser
+                            ,musicTeleport, musicFall, musicGameOver, musicUnlock;
+
     [SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] public static int Keys=0;
     [SerializeField] public static int Lives = 2;
     [SerializeField] private static int Coins;
     string[,] CurrentScene = new string[3, 4] { { "UI_L1K0", "UI_L1K1", "UI_L1K2", "UI_L1K3"},
-        { "UI_L2K0", "UI_L2K1", "UI_L2K2", "UI_L2K3"}, { "UI_L3K0", "UI_L3K1", "UI_L3K2","UI_L3K3"} };
-    private Animation My_Animation;
+                                                { "UI_L2K0", "UI_L2K1", "UI_L2K2", "UI_L2K3"}, 
+                                                { "UI_L3K0", "UI_L3K1", "UI_L3K2", "UI_L3K3"} };
     private Vector3[] directions3 = { new Vector3(0, 0, (float)1.25), new Vector3((float)1.25, 0, 0), new Vector3((float)-1.25, 0, 0), new Vector3(0, 0, (float)-1.25) };
     private KeyCode[] keyscode = new[] { KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow };
-    private bool My_IsPlaying_forward = false;
     private Transform AnimationPlayer;
     private Rigidbody PlayerRigidBody;
     private Transform Porte_sortie;
@@ -62,8 +63,15 @@ public class Players : MonoBehaviour
         switch (Col.gameObject.tag)
         {
             case "Heart":
-                Lives++;
-                Debug.Log("Life+1");
+                if (Lives < 2)
+                {
+                    Lives++;
+                    Debug.Log("Life+1");
+                }
+                else
+                {
+                    DataPlayer.Coins += 10;
+                }
                 break;
             case "Coin":
                 Coins++;
@@ -185,5 +193,4 @@ public class Players : MonoBehaviour
             Keys = 0;
         }
     }
-
 }

@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4350542456142199386}
   m_Layer: 0
   m_Name: Heart
-  m_TagString: Untagged
+  m_TagString: Heart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6994707136608252889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 612763277506996803}
@@ -307,3 +307,16 @@ CapsuleCollider:
   m_Height: 0.017966162
   m_Direction: 1
   m_Center: {x: -0.000048274174, y: -0.002049559, z: 0.0013767843}
+--- !u!114 &7414434209483860210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273356564390555897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683a4e25aff330c4795fc8bb58360e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound_heart_collect: {fileID: 1083750717126021804}
